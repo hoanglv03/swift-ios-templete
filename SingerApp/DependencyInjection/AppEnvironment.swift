@@ -20,6 +20,11 @@ struct AppEnvironment {
 extension AppEnvironment {
 
     static func bootstrap() -> AppEnvironment {
+        // Configure logger first
+        EnvironmentConfig.shared.configureLogger()
+        
+        logger.info("🚀 SingerApp starting...", category: "App")
+        
         let appState = Store<AppState>(AppState())
         /*
          To see the deep linking in action:
@@ -39,6 +44,8 @@ extension AppEnvironment {
         let session = configuredURLSession()
         let webRepositories = configuredWebRepositories(session: session)
         let modelContainer = configuredModelContainer()
+        logger.info("✅ Model container initialized", category: "App")
+        
         let dbRepositories = configuredDBRepositories(modelContainer: modelContainer)
         let interactors = configuredInteractors(appState: appState, webRepositories: webRepositories, dbRepositories: dbRepositories)
         let diContainer = DIContainer(appState: appState, interactors: interactors)
@@ -49,6 +56,8 @@ extension AppEnvironment {
             deepLinksHandler: deepLinksHandler,
             pushNotificationsHandler: pushNotificationsHandler,
             pushTokenWebRepository: webRepositories.pushToken)
+        logger.info("✅ App environment bootstrap completed", category: "App")
+        
         return AppEnvironment(
             isRunningTests: ProcessInfo.processInfo.isRunningTests,
             diContainer: diContainer,
@@ -85,7 +94,7 @@ extension AppEnvironment {
         do {
             return try ModelContainer.appModelContainer()
         } catch {
-            // Log the error
+            logger.error("Failed to initialize model container", category: "Database", metadata: ["error": error.localizedDescription])
             return ModelContainer.stub
         }
     }

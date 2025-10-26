@@ -25,16 +25,30 @@ extension WebRepository {
     where Value: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
 
         let request = try endpoint.urlRequest(baseURL: baseURL)
+        
+        logger.logNetwork("API request started", url: request.url?.absoluteString, method: request.httpMethod)
+        
         let (data, response) = try await session.data(for: request)
+        
         guard let code = (response as? HTTPURLResponse)?.statusCode else {
+            logger.error("Unexpected response format", category: "Network")
             throw APIError.unexpectedResponse
         }
+        
         guard httpCodes.contains(code) else {
+            logger.warning("HTTP error code: \(code)", category: "Network", 
+                metadata: ["statusCode": code, "url": request.url?.absoluteString ?? "unknown"])
             throw APIError.httpCode(code)
         }
+        
+        logger.info("API request successful", category: "Network", 
+            metadata: ["statusCode": code, "dataSize": data.count])
+        
         do {
             return try decoder.decode(Value.self, from: data)
         } catch {
+            logger.error("Failed to decode response", category: "Network", 
+                metadata: ["error": error.localizedDescription])
             throw APIError.unexpectedResponse
         }
     }
