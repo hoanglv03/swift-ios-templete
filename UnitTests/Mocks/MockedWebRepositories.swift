@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit.UIImage
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 class TestWebRepository: WebRepository {
     let session: URLSession = .mockedResponsesOnly

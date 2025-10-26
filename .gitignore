@@ -56,3 +56,16 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/app_archive
+
+## Environment files (keep secrets safe!)
+*.env
+.env.*
+config/env.*
+!config/env.example
+!config/env.*.example
+
+## Local configuration files
+config.plist
+Config.plist
+*Config.plist
+!.example.plist

@@ -9,7 +9,7 @@
 import Testing
 import UIKit
 import Combine
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 @Suite struct ImagesInteractorTests {
 

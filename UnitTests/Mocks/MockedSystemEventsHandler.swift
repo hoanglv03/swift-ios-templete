@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 // MARK: - SystemEventsHandler
 

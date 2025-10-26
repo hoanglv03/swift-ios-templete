@@ -1,0 +1,103 @@
+# GitLab CI/CD Pipeline for SingerApp
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  XCODE_VERSION: "15.0"
+  
+# Development Build
+build:development:
+  stage: build
+  script:
+    - xcodebuild clean build -scheme SingerApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  tags:
+    - ios
+  only:
+    - develop
+
+# Staging Build & Test
+build:staging:
+  stage: build
+  before_script:
+    - echo "ENVIRONMENT=staging" > config/env.staging
+    - echo "API_BASE_URL=${STAGING_API_URL}" >> config/env.staging
+    - echo "API_KEY=${STAGING_API_KEY}" >> config/env.staging
+  script:
+    - xcodebuild clean build -scheme SingerApp -configuration Release CODE_SIGN_IDENTITY="${APPLE_DEVELOPER}" PROVISIONING_PROFILE="${STAGING_PROFILE}"
+  tags:
+    - ios
+  artifacts:
+    paths:
+      - SingerApp.ipa
+    expire_in: 1 week
+  only:
+    - staging
+
+# Production Build
+build:production:
+  stage: build
+  before_script:
+    - echo "ENVIRONMENT=production" > config/env.production
+    - echo "API_BASE_URL=${PROD_API_URL}" >> config/env.production
+    - echo "API_KEY=${GITLAB_API_KEY}" >> config/env.production
+    - echo "API_SECRET=${GITLAB_API_SECRET}" >> config/env.production
+    - echo "SENTRY_DSN=${GITLAB_SENTRY_DSN}" >> config/env.production
+    - echo "ENABLE_ANALYTICS=true" >> config/env.production
+  script:
+    - xcodebuild clean archive -scheme SingerApp -archivePath SingerApp.xcarchive CODE_SIGN_IDENTITY="${APPLE_DEVELOPER}" PROVISIONING_PROFILE="${PROD_PROFILE}"
+    - xcodebuild -exportArchive -archivePath SingerApp.xcarchive -exportPath . -exportOptionsPlist exportOptions.plist
+  tags:
+    - ios
+  artifacts:
+    paths:
+      - SingerApp.ipa
+    expire_in: 1 month
+  only:
+    - master
+    - tags
+
+# Run Tests
+test:
+  stage: test
+  script:
+    - xcodebuild test -scheme SingerApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  tags:
+    - ios
+  artifacts:
+    reports:
+      junit: test-results.xml
+    paths:
+      - test-results.xml
+  only:
+    - develop
+    - staging
+    - master
+
+# Deploy to TestFlight
+deploy:testflight:
+  stage: deploy
+  script:
+    - fastlane beta
+  tags:
+    - ios
+  only:
+    - staging
+  when: manual
+
+# Deploy to App Store
+deploy:production:
+  stage: deploy
+  script:
+    - fastlane release
+  tags:
+    - ios
+  only:
+    - master
+  when: manual
+  environment:
+    name: production
+    url: https://apps.apple.com/app/singerapp
+

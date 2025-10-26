@@ -8,7 +8,7 @@
 
 import Testing
 import UserNotifications
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 @MainActor
 @Suite struct PushNotificationsHandlerTests {

@@ -8,7 +8,7 @@
 
 import Testing
 import SwiftData
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 @MainActor
 @Suite struct CountriesDBRepositoryTests {

@@ -4,13 +4,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "CountriesSwiftUI",
+    name: "SingerApp",
     platforms: [
         .iOS(.v18),
         .macOS(.v12)
     ],
     products: [
-        .library(name: "CountriesSwiftUI", targets: ["CountriesSwiftUI"])
+        .library(name: "SingerApp", targets: ["SingerApp"])
     ],
     dependencies: [
         .package(url: "https://github.com/nalexn/EnvironmentOverrides", from: "0.0.4"),
@@ -18,11 +18,11 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "CountriesSwiftUI",
+            name: "SingerApp",
             dependencies: [
                 .product(name: "EnvironmentOverrides", package: "EnvironmentOverrides")
             ],
-            path: "CountriesSwiftUI",
+            path: "SingerApp",
             exclude: [
                 "Resources/Preview Assets.xcassets",
             ],
@@ -40,7 +40,7 @@ let package = Package(
         .testTarget(
             name: "UnitTests",
             dependencies: [
-                "CountriesSwiftUI",
+                "SingerApp",
                 .product(name: "ViewInspector", package: "ViewInspector")
             ],
             path: "UnitTests",

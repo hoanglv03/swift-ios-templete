@@ -7,7 +7,7 @@
 //
 
 import SwiftData
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 // MARK: - CountriesWebRepository
 

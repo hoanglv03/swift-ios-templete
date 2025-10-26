@@ -8,7 +8,7 @@
 
 import Testing
 import SwiftUI
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 @MainActor
 @Suite class CountriesInteractorTests {

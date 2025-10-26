@@ -10,7 +10,7 @@ import Testing
 import ViewInspector
 import SwiftData
 import SwiftUI
-@testable import CountriesSwiftUI
+@testable import SingerApp
 
 @MainActor
 @Suite struct CountriesListTests {
