@@ -1,10 +1,6 @@
 //
 //  ImagesInteractor.swift
 //  SingerApp
-//
-//  Created by Alexey Naumov on 09.11.2019.
-//  Copyright © 2019 Alexey Naumov. All rights reserved.
-//
 
 import Combine
 import Foundation

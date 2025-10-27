@@ -1,10 +1,7 @@
 //
 //  App.swift
 //  SingerApp
-//
-//  Created by Alexey on 7/11/24.
-//  Copyright © 2024 Alexey Naumov. All rights reserved.
-//
+
 
 import SwiftUI
 import EnvironmentOverrides

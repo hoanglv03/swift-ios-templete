@@ -1,10 +1,7 @@
 //
 //  MockedDBRepositories.swift
 //  UnitTests
-//
-//  Created by Alexey Naumov on 18.04.2020.
-//  Copyright © 2020 Alexey Naumov. All rights reserved.
-//
+
 
 import SwiftData
 @testable import SingerApp

@@ -1,10 +1,6 @@
 //
 //  EnvironmentConfig.swift
 //  SingerApp
-//
-//  Created by Alexey Naumov.
-//  Copyright © 2024 Alexey Naumov. All rights reserved.
-//
 
 import Foundation
 

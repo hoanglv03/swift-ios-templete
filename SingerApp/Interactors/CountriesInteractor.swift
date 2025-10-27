@@ -1,11 +1,3 @@
-//
-//  CountriesInteractor.swift
-//  SingerApp
-//
-//  Created by Alexey on 7/11/24.
-//  Copyright © 2024 Alexey Naumov. All rights reserved.
-//
-
 protocol CountriesInteractor {
     func refreshCountriesList() async throws
     func loadCountryDetails(country: DBModel.Country, forceReload: Bool) async throws -> DBModel.CountryDetails

@@ -1,10 +1,7 @@
 //
 //  CountryDetails.swift
 //  SingerApp
-//
-//  Created by Alexey Naumov on 25.10.2019.
-//  Copyright © 2019 Alexey Naumov. All rights reserved.
-//
+
 
 import SwiftUI
 import Combine

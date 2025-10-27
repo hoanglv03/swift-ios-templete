@@ -2,9 +2,7 @@
 //  HelpersTests.swift
 //  UnitTests
 //
-//  Created by Alexey Naumov on 27.04.2020.
-//  Copyright © 2020 Alexey Naumov. All rights reserved.
-//
+
 
 import Foundation
 import Testing

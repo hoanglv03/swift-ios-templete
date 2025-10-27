@@ -1,10 +1,7 @@
 //
 //  TestHelpers.swift
 //  SingerApp
-//
-//  Created by Alexey on 15/11/24.
-//  Copyright © 2024 Alexey Naumov. All rights reserved.
-//
+
 
 import UIKit.UIColor
 import SwiftUI

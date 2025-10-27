@@ -1,10 +1,6 @@
 //
 //  ImageViewTests.swift
 //  UnitTests
-//
-//  Created by Alexey Naumov on 10.11.2019.
-//  Copyright © 2019 Alexey Naumov. All rights reserved.
-//
 
 import Testing
 import SwiftUI

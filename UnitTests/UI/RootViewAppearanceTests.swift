@@ -1,10 +1,7 @@
 //
 //  RootViewAppearanceTests.swift
 //  UnitTests
-//
-//  Created by Alexey Naumov on 05.04.2020.
-//  Copyright © 2020 Alexey Naumov. All rights reserved.
-//
+
 
 import Testing
 import SwiftUI

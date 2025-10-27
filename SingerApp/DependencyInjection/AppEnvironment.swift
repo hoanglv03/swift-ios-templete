@@ -2,9 +2,7 @@
 //  AppEnvironment.swift
 //  SingerApp
 //
-//  Created by Alexey on 7/11/24.
-//  Copyright © 2024 Alexey Naumov. All rights reserved.
-//
+
 
 import UIKit
 import SwiftData
@@ -23,7 +21,7 @@ extension AppEnvironment {
         // Configure logger first
         EnvironmentConfig.shared.configureLogger()
         
-        logger.info("🚀 SingerApp starting...", category: "App")
+        logger.info("🚀 SingerApp starting...", category: "App",)
         
         let appState = Store<AppState>(AppState())
         /*
