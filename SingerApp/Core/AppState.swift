@@ -9,8 +9,11 @@ struct AppState: Equatable {
 
 extension AppState {
     struct ViewRouting: Equatable {
-        var countriesList = CountriesList.Routing()
-        var countryDetails = CountryDetails.Routing()
+        // Add routing state here when needed
+        // Examples for future deep links:
+        // var home: HomeRouting?
+        // var productId: String?
+        // var showCart: Bool = false
     }
 }
 

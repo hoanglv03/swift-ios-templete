@@ -6,20 +6,33 @@ import Foundation
 
 enum DeepLink: Equatable {
     
-    case showCountryFlag(alpha3Code: String)
-
+    // Add your deep links here as needed
+    // Examples:
+    // case productDetail(productId: String)
+    // case openCart
+    // case showAccount
+    
+    case home // Example default case
+    
     init?(url: URL) {
         guard
             let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
             components.host == "www.example.com",
             let query = components.queryItems
-            else { return nil }
-        if let item = query.first(where: { $0.name == "alpha3code" }),
-            let alpha3Code = item.value {
-            self = .showCountryFlag(alpha3Code: alpha3Code)
-            return
+        else { 
+            // Default to home for now
+            self = .home
+            return 
         }
-        return nil
+        
+        // Add your URL parsing logic here
+        // Example:
+        // if let productId = query.first(where: { $0.name == "productId" })?.value {
+        //     self = .productDetail(productId: productId)
+        //     return
+        // }
+        
+        self = .home
     }
 }
 
@@ -40,11 +53,10 @@ struct RealDeepLinksHandler: DeepLinksHandler {
     
     func open(deepLink: DeepLink) {
         switch deepLink {
-        case let .showCountryFlag(alpha3Code):
+        case .home:
             let routeToDestination = {
                 self.container.appState.bulkUpdate {
-                    $0.routing.countriesList.countryCode = alpha3Code
-                    $0.routing.countryDetails.detailsSheet = true
+                    $0.routing.self
                 }
             }
             /*
@@ -60,6 +72,13 @@ struct RealDeepLinksHandler: DeepLinksHandler {
             } else {
                 routeToDestination()
             }
+            
+        // Add your deep link handling cases here as needed
+        // Example:
+        // case let .productDetail(productId):
+        //     self.container.appState.bulkUpdate {
+        //         $0.routing.productId = productId
+        //     }
         }
     }
 }

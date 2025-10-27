@@ -43,7 +43,7 @@ extension RealPushNotificationsHandler: UNUserNotificationCenterDelegate {
             return
         }
         Task { @MainActor in
-            deepLinksHandler.open(deepLink: .showCountryFlag(alpha3Code: countryCode))
+            deepLinksHandler.open(deepLink: .home)
             completionHandler()
         }
     }

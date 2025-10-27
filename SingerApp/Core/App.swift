@@ -24,7 +24,7 @@ extension AppEnvironment {
             if isRunningTests {
                 Text("Running unit tests")
             } else {
-                CountriesList()
+                SplashView()
                     .modifier(RootViewAppearance())
                     .modelContainer(modelContainer)
                     .attachEnvironmentOverrides(onChange: onChangeHandler)

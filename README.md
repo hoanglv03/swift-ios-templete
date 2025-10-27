@@ -4,7 +4,7 @@ A modern iOS app demonstrating **Clean Architecture** with **SwiftUI** and **Swi
 
 ## 📱 Overview
 
-SingerApp is a SwiftUI application that displays information about countries using the [REST Countries API](https://restcountries.com/). This project serves as a comprehensive example of implementing Clean Architecture principles in a real-world iOS application.
+SingerApp is a SwiftUI e-commerce application template that demonstrates modern iOS development patterns. This project serves as a comprehensive example of implementing Clean Architecture principles in a real-world iOS application with navigation, authentication, and tab-based UI.
 
 ### Key Features
 
@@ -14,6 +14,8 @@ SingerApp is a SwiftUI application that displays information about countries usi
 - ✅ **Dependency Injection** - Native SwiftUI DI using `@Environment`
 - ✅ **Programmatic Navigation** - Deep linking support with push notifications
 - ✅ **Centralized State Management** - Redux-like `AppState` as single source of truth
+- ✅ **Tab-Based Navigation** - Bottom tab bar with Home, Shop, Wishlist, Cart, and Account
+- ✅ **Authentication Flow** - Login, Register, Password Reset, and Email Verification screens
 - ✅ **Environment Configuration** - Three environments (Development, Staging, Production)
 - ✅ **Comprehensive Logging** - Multi-destination logger with file and remote support
 - ✅ **Full Test Coverage** - Including UI tests with ViewInspector
@@ -27,13 +29,12 @@ The app follows Clean Architecture principles with three distinct layers:
 ```text
 ┌─────────────────────────────────────────────────┐
 │           Presentation Layer (SwiftUI)           │
-│  - Views (CountriesList, CountryDetails, etc.)  │
+│  - Views (Splash, MainTab, Auth, etc.)           │
 │  - No business logic, pure UI                    │
 └──────────────────┬──────────────────────────────┘
                    │
 ┌──────────────────▼──────────────────────────────┐
 │         Business Logic Layer (Interactors)      │
-│  - CountriesInteractor                          │
 │  - ImagesInteractor                             │
 │  - UserPermissionsInteractor                    │
 │  - Communicate with Repositories                │
@@ -42,7 +43,7 @@ The app follows Clean Architecture principles with three distinct layers:
                    │
 ┌──────────────────▼──────────────────────────────┐
 │        Data Access Layer (Repositories)         │
-│  - WebAPI: CountriesWebRepository, etc.        │
+│  - WebAPI: ImagesWebRepository, etc.            │
 │  - Database: SwiftData repositories             │
 └─────────────────────────────────────────────────┘
 ```
@@ -88,49 +89,70 @@ SingerApp/
 │   ├── App.swift                  # App entry point
 │   ├── AppDelegate.swift          # App lifecycle management
 │   ├── AppState.swift            # Centralized state management
+│   ├── DeepLinksHandler.swift    # Deep link handling
+│   ├── PushNotificationsHandler.swift # Push notification handling
+│   ├── SystemEventsHandler.swift # System events handling
 │   ├── Config/
 │   │   └── EnvironmentConfig.swift # Environment configuration
-│   ├── Logger/                    # Logging system
-│   └── DeepLinksHandler.swift    # Deep link handling
+│   └── Logger/                    # Logging system
+│       ├── AppLogger.swift       # Logger implementation
+│       └── LogLevel.swift        # Log levels
 │
 ├── DependencyInjection/           # DI setup
 │   ├── DIContainer.swift         # Dependency injection container
 │   └── AppEnvironment.swift    # App environment management
 │
 ├── Interactors/                   # Business logic layer
-│   ├── CountriesInteractor.swift
-│   ├── ImagesInteractor.swift
-│   └── UserPermissionsInteractor.swift
+│   ├── CountriesInteractor.swift # Countries business logic (legacy)
+│   ├── ImagesInteractor.swift    # Image loading interactor
+│   └── UserPermissionsInteractor.swift # Permission handling
 │
 ├── Repositories/                  # Data access layer
 │   ├── Models/                   # Data models
-│   │   ├── Country.swift         # Country data model
-│   │   ├── CountryCurrency.swift
-│   │   ├── CountryDetails.swift
+│   │   ├── Country.swift         # Country data model (legacy)
+│   │   ├── CountryCurrency.swift # Currency model
+│   │   ├── CountryDetails.swift  # Country details model
 │   │   ├── AppSchema.swift       # SwiftData schema
-│   │   └── MockedData.swift
+│   │   └── MockedData.swift      # Mock data for testing
 │   ├── WebAPI/                   # Network repositories
 │   │   ├── WebRepository.swift   # Base web repository
-│   │   ├── CountriesWebRepository.swift
-│   │   ├── ImagesWebRepository.swift
-│   │   └── PushTokenWebRepository.swift
+│   │   ├── CountriesWebRepository.swift # Countries API (legacy)
+│   │   ├── ImagesWebRepository.swift      # Image loading
+│   │   └── PushTokenWebRepository.swift  # Push token API
 │   └── Database/                 # Database repositories
-│       ├── CountriesDBRepository.swift
-│       └── ModelContainer.swift
+│       ├── CountriesDBRepository.swift    # Countries DB (legacy)
+│       └── ModelContainer.swift           # SwiftData container
 │
 ├── UI/                           # Presentation layer
 │   ├── Common/                   # Shared UI components
+│   │   ├── AppText.swift         # Common text component
+│   │   ├── AppTextField.swift    # Common text field component
 │   │   ├── ErrorView.swift
 │   │   ├── ImageView.swift
 │   │   └── Query+Search.swift
-│   ├── CountriesList/            # Countries list screen
-│   │   ├── CountriesListView.swift
-│   │   ├── CountryCell.swift
-│   │   └── LocaleReader.swift
-│   ├── CountryDetails/           # Country details screen
-│   │   ├── CountryDetailsView.swift
-│   │   ├── DetailRow.swift
-│   │   └── ModalFlagView.swift
+│   ├── Splash/                   # Splash screen
+│   │   └── SplashView.swift      # Initial screen with branding
+│   ├── MainTab/                  # Bottom tab navigation
+│   │   ├── MainTabView.swift     # Tab bar container
+│   │   ├── Home/
+│   │   │   └── HomeView.swift    # Home screen
+│   │   ├── Shop/
+│   │   │   └── ShopView.swift    # Shop screen
+│   │   ├── Wishlist/
+│   │   │   └── WishlistView.swift # Wishlist screen
+│   │   ├── Cart/
+│   │   │   └── CartView.swift    # Shopping cart screen
+│   │   └── Account/
+│   │       └── AccountView.swift # User account screen
+│   ├── Auth/                     # Authentication screens
+│   │   ├── Login/
+│   │   │   └── LoginView.swift   # Login screen
+│   │   ├── Register/
+│   │   │   └── RegisterView.swift # Registration screen
+│   │   ├── ResetPassword/
+│   │   │   └── ResetPasswordView.swift # Password reset screen
+│   │   └── VerifyEmail/
+│   │       └── VerifyEmailView.swift # Email verification screen
 │   └── RootViewModifier.swift
 │
 ├── Utilities/                     # Helper utilities
@@ -151,9 +173,12 @@ SingerApp/
 │   └── build.sh                  # Build automation
 │
 ├── docs/                          # Documentation
+│   ├── ADD_NEW_FEATURE_GUIDE.md   # Guide to add new features
+│   ├── COMMON_COMPONENTS_GUIDE.md # Common UI components guide
+│   ├── CONFIGURATION_SUMMARY.md   # Configuration architecture
 │   ├── ENVIRONMENT_SETUP.md      # Environment setup guide
-│   ├── CONFIGURATION_SUMMARY.md  # Configuration architecture
-│   └── LOGGER_SUMMARY.md         # Logging system guide
+│   ├── LOGGER_SUMMARY.md          # Logging system guide
+│   └── NAVIGATION_FLOW.md         # Navigation flow documentation
 │
 └── UnitTests/                     # Test suites
     ├── Mocks/                     # Mock implementations

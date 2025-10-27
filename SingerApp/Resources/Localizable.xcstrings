@@ -52,7 +52,11 @@
         }
       }
     },
+    "Account" : {
+
+    },
     "Allow Push" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -85,6 +89,7 @@
       }
     },
     "Basic Info" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -100,7 +105,11 @@
         }
       }
     },
+    "Cancel" : {
+
+    },
     "Cancel loading" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -133,6 +142,7 @@
       }
     },
     "Capital" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -148,7 +158,11 @@
         }
       }
     },
+    "Cart" : {
+
+    },
     "Close" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -165,6 +179,7 @@
       }
     },
     "Code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -180,7 +195,11 @@
         }
       }
     },
+    "Confirm Password" : {
+
+    },
     "Countries" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -196,7 +215,11 @@
         }
       }
     },
+    "Create Account" : {
+
+    },
     "Currencies" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -228,7 +251,35 @@
         }
       }
     },
+    "Don't have an account?" : {
+
+    },
+    "Email" : {
+
+    },
+    "Enter the verification code sent to your email" : {
+
+    },
+    "Enter your email to reset password" : {
+
+    },
+    "Forgot Password?" : {
+
+    },
+    "Full Name" : {
+
+    },
+    "Home" : {
+
+    },
+    "Login" : {
+
+    },
+    "Login to your account" : {
+
+    },
     "Neighboring countries" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -245,6 +296,7 @@
       }
     },
     "No matches found" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -260,7 +312,11 @@
         }
       }
     },
+    "Password" : {
+
+    },
     "Population" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -277,6 +333,7 @@
       }
     },
     "Population %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -291,6 +348,15 @@
           }
         }
       }
+    },
+    "Register" : {
+
+    },
+    "Resend Code" : {
+
+    },
+    "Reset Password" : {
+
     },
     "Retry" : {
       "localizations" : {
@@ -324,6 +390,18 @@
         }
       }
     },
+    "Send Reset Link" : {
+
+    },
+    "Shop" : {
+
+    },
+    "Sign up to get started" : {
+
+    },
+    "SingerApp" : {
+
+    },
     "Unable to load image" : {
       "localizations" : {
         "de" : {
@@ -339,6 +417,33 @@
           }
         }
       }
+    },
+    "Verification Code" : {
+
+    },
+    "Verify" : {
+
+    },
+    "Verify Email" : {
+
+    },
+    "Welcome Back" : {
+
+    },
+    "Welcome to Cart Screen" : {
+
+    },
+    "Welcome to Home Screen" : {
+
+    },
+    "Welcome to Shop Screen" : {
+
+    },
+    "Welcome to Wishlist Screen" : {
+
+    },
+    "Wishlist" : {
+
     }
   },
   "version" : "1.0"
