@@ -495,6 +495,240 @@ See `.gitlab-ci.yml` for detailed CI/CD configuration.
 - Use Combine for reactive updates
 - Profile with Instruments
 
+## 📋 Code Conventions
+
+This project follows Swift naming conventions and best practices for maintainability and consistency.
+
+### Folder/Directory Naming
+
+Follow these conventions when creating new folders and directories:
+
+| Folder Type | Naming Convention | Example |
+|-------------|------------------|---------|
+| Features | **PascalCase** | `CountriesList/`, `CountryDetails/` |
+| Common/Shared | **PascalCase** | `Common/`, `Utilities/`, `Resources/` |
+| Layer | **PascalCase** | `Core/`, `Interactors/`, `Repositories/` |
+| Test Suites | **PascalCase** | `Mocks/`, `System/`, `UI/` |
+
+**Rules:**
+
+- ✅ Use **PascalCase** for all folder names
+- ✅ Start with uppercase letter
+- ✅ Descriptive and feature-based naming
+- ✅ Match folder purpose (features, layers, utilities)
+- ❌ No camelCase or snake_case
+- ❌ No abbreviations unless widely understood
+
+**Examples:**
+
+```bash
+# ✅ Good folder names
+CountriesList/              # Feature-based
+CountryDetails/
+Common/                     # Shared components
+NetworkRepository/          # Layer-based
+UserAuthentication/         # Feature-based
+
+# ❌ Bad folder names
+countriesList/              # Wrong: lowercase start
+country_details/           # Wrong: snake_case
+commonUtils/               # Wrong: camelCase
+net/                       # Wrong: abbreviation
+```
+
+### Variable Naming
+
+Follow Swift's official naming conventions:
+
+#### Properties and Variables
+
+| Type | Convention | Example |
+|------|-----------|---------|
+| Constants | **camelCase** | `let apiKey = "..."` |
+| Variables | **camelCase** | `var userCount = 0` |
+| Properties | **camelCase** | `let isLoggedIn: Bool` |
+| Private vars | **camelCase** with `private` | `private var dataStore` |
+| Computed | **camelCase** | `var totalCount: Int` |
+
+#### Types and Classes
+
+| Type | Convention | Example |
+|------|-----------|---------|
+| Classes | **PascalCase** | `CountriesInteractor` |
+| Structs | **PascalCase** | `CountryDetails` |
+| Protocols | **PascalCase** + protocol suffix | `CountriesInteracting` |
+| Enums | **PascalCase** | `LogLevel`, `Environment` |
+| Type aliases | **PascalCase** | `typealias CountryID = String` |
+
+#### Functions and Methods
+
+| Type | Convention | Example |
+|------|-----------|---------|
+| Functions | **camelCase** (verb start) | `loadCountries()`, `handleError()` |
+| Async functions | **camelCase** | `await fetchData()` |
+| Private functions | **camelCase** + `private` | `private func internalLogic()` |
+| Protocols | start with verb | `func loadCountries()` |
+
+**Rules:**
+
+- ✅ Use **camelCase** for variables, functions, and properties
+- ✅ Start types with **PascalCase**
+- ✅ Start function names with verbs (`load`, `save`, `fetch`)
+- ✅ Use descriptive names that explain purpose
+- ✅ Prefix private members with `private`
+- ❌ Avoid abbreviations unless universally known
+- ❌ Don't use Hungarian notation
+- ❌ Avoid single letters (except loop indices)
+
+**Examples:**
+
+```swift
+// ✅ Good variable names
+let countriesList: [Country] = []
+var isLoading: Bool = false
+private var dataCache: [String: Any] = [:]
+let apiBaseURL: String
+func loadCountries() async throws -> [Country]
+func handleAuthenticationError(_ error: Error)
+
+// ✅ Good type names
+class CountriesInteractor { }
+struct CountryDetails { }
+protocol CountriesInteracting { }
+enum LogLevel { case debug, info, error }
+
+// ❌ Bad variable names
+let countries_list      // Wrong: snake_case
+var IsLoading           // Wrong: PascalCase for variable
+var db                  // Wrong: unclear abbreviation
+func GET()              // Wrong: all caps, not a verb
+```
+
+### File Naming
+
+Files should match their primary content:
+
+**Rules:**
+
+- ✅ Match the primary class/struct name exactly
+- ✅ Use **PascalCase** for Swift files
+- ✅ One primary type per file
+- ✅ Add additional types in same file only if closely related
+- ❌ Don't use generic names like `Utils.swift`
+
+**Examples:**
+
+```bash
+# ✅ Good file names
+CountriesInteractor.swift          # Contains CountriesInteractor class
+CountryDetails.swift               # Contains CountryDetails struct
+CountriesWebRepository.swift       # Contains CountriesWebRepository class
+LogLevel.swift                     # Contains LogLevel enum
+
+# ✅ Helper files in same feature
+# In CountryDetails.swift, can contain:
+# - CountryDetails struct
+# - DetailRow struct
+# - ModalFlagView struct
+
+# ❌ Bad file names
+interactor.swift                   # Wrong: lowercase, not descriptive
+country_interactor.swift           # Wrong: snake_case
+Countries_list.swift               # Wrong: lowercase after underscore
+```
+
+### Protocol Naming
+
+Protocols should be named after their purpose:
+
+**Rules:**
+
+- ✅ Use **PascalCase**
+- ✅ Add "ing" suffix for protocols describing behavior: `CountriesInteracting`
+- ✅ Add "able" suffix for capabilities: `Codable`, `Equatable`
+- ✅ Remove "Protocol" suffix (avoid redundancy)
+- ❌ Don't use "I" prefix (not C#)
+
+**Examples:**
+
+```swift
+// ✅ Good protocol names
+protocol CountriesInteracting { }   // Describes behavior
+protocol CountriesLoading { }       // Describes action
+protocol NetworkErrorHandling { }   // Describes capability
+protocol CountryProviding { }       // Describes providing role
+
+// ❌ Bad protocol names
+protocol CountriesProtocol         // Wrong: redundant "Protocol"
+protocol ICountriesRepository      // Wrong: "I" prefix
+protocol countriesInteracting      // Wrong: lowercase start
+```
+
+### Enum Naming
+
+Follow Swift conventions for enums:
+
+**Rules:**
+
+- ✅ Use **PascalCase** for enum name
+- ✅ Use **camelCase** for enum cases
+- ✅ Optionally rawValue with UPPERCASE
+- ✅ Use descriptive names
+
+**Examples:**
+
+```swift
+// ✅ Good enum naming
+enum LogLevel: String {
+    case debug = "DEBUG"
+    case info = "INFO"
+    case error = "ERROR"
+}
+
+enum Environment {
+    case development
+    case staging
+    case production
+}
+
+// ❌ Bad enum naming
+enum logLevel { }                   // Wrong: lowercase start
+enum LogLevel {
+    case DEBUG                      // Wrong: uppercase case
+    case Info                       // Wrong: PascalCase case
+}
+```
+
+### Constant Naming
+
+Constants follow specific conventions:
+
+**Rules:**
+
+- ✅ Use **camelCase** for instance constants
+- ✅ Use **PascalCase** for type constants
+- ✅ Use descriptive names
+- ✅ Group related constants
+
+**Examples:**
+
+```swift
+// ✅ Good constant naming
+let apiKey = "abc123"                    // Instance constant
+let maxRetryAttempts = 3
+let defaultTimeout: TimeInterval = 30
+
+struct APIConfig {
+    static let baseURL = "https://api.example.com"  // Type constant
+    static let timeout: TimeInterval = 30
+}
+
+// ❌ Bad constant naming
+let API_KEY = "abc123"                   // Wrong: all caps
+let max_retry_attempts = 3               // Wrong: snake_case
+let MAX_TIMEOUT = 30                     // Wrong: all caps for instance
+```
+
 ## 🔀 Git Workflow
 
 This project follows a structured Git workflow to ensure code quality and team collaboration.
